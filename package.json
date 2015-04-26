@@ -1,0 +1,22 @@
+{
+  "name": "my-fson",
+  "version": "0.1.0",
+  "description": "File System Object Notation for Node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "author": "Jon Casey",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joncasey/my-fson"
+  },
+  "keywords": [
+    "fs",
+    "json",
+    "readdir",
+    "recurse",
+    "directory"
+  ]
+}
