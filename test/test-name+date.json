@@ -1,0 +1,13 @@
+{
+  "name": "folder",
+  "children": [
+    {
+      "name": "file1.txt",
+      "date": "2015-04-26T16:05:06.000Z"
+    },
+    {
+      "name": "file2.txt",
+      "date": "2015-04-26T16:05:06.000Z"
+    }
+  ]
+}
