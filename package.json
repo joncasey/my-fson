@@ -1,6 +1,6 @@
 {
   "name": "my-fson",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "File System Object Notation for Node.",
   "main": "index.js",
   "scripts": {
