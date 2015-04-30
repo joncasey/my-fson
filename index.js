@@ -35,6 +35,11 @@ fson.save = function (to, replacer, space, callback) {
   return this
 }
 
+fson.saveSync = function (to, replacer, space) {
+  fs.writeFileSync(to, this.toString(replacer, space))
+  return this
+}
+
 fson.toString = function (replacer, space) {
   return JSON.stringify(this, replacer, space)
 }
