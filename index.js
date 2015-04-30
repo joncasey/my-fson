@@ -27,10 +27,11 @@ fson.remove = function (properties) {
   return this
 }
 
-fson.save = function (to, replacer, space) {
-  var file = fs.createWriteStream(to)
-  file.write(this.toString(replacer, space))
-  file.end()
+fson.save = function (to, replacer, space, callback) {
+  var a = Array.prototype.slice.call(arguments)
+  if (typeof a[1] === 'function') a.splice(1, 0, undefined)
+  if (typeof a[2] === 'function') a.splice(2, 0, undefined)
+  fs.writeFile(a[0], this.toString(a[1], a[2]), a[3])
   return this
 }
 
