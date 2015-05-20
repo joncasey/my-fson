@@ -14,6 +14,14 @@ var fs = require('fs'),
     return object
   }
 
+fson.end = function () {
+  return this
+}
+
+fson.filter = function (re) {
+  return filter(this, re)
+}
+
 fson.gzip = function (to, replacer, space) {
   var streamOut = fs.createWriteStream(to)
   zlib.gzip(this.toString(replacer, space), function (_, result) {
@@ -42,6 +50,40 @@ fson.saveSync = function (to, replacer, space) {
 
 fson.toString = function (replacer, space) {
   return JSON.stringify(this, replacer, space)
+}
+
+function filter(data, re) {
+
+  var walk = function (o) {
+    if (o.children) {
+      o.children = o.children.filter(function (child) {
+        return child.children || re.test(child.name)
+      })
+      o.children.forEach(function (child) {
+        walk(child, re)
+      })
+    }
+  }
+
+  var s = JSON.stringify(data)
+  var clone = JSON.parse(s)
+
+  walk(clone)
+
+  s = JSON.stringify(clone)
+
+  var empty = /,?\{"name":"[^"]+","children":\[\]\}/g
+  while (empty.test(s))
+    s = s.replace(empty, '')
+  s = s.replace(/\[,/g, '[')
+
+  clone = JSON.parse(s)
+  clone.__proto__ = fson
+  clone.end = function () {
+    return data
+  }
+  return clone
+
 }
 
 function remove(data, properties) {
